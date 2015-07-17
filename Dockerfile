@@ -6,7 +6,6 @@ RUN rm -rf /var/gonano/db/pkgin && /opt/gonano/bin/pkgin -y up && \
     rm -rf /var/gonano/db/pkgin
 
 # copy files
-ADD files/service/. /etc/service/
 ADD scripts/. /var/tmp/
 
 # setup runit
