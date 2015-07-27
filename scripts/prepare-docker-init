@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Install init process.
+mkdir -p /etc/nanoinit.d
+mkdir -p /etc/container_environment
+chmod 700 /etc/container_environment
+touch /etc/container_environment.sh
+
+groupadd -g 8377 docker_env
+chown :docker_env /etc/container_environment.sh
+chmod 640 /etc/container_environment.sh
+ln -s /etc/container_environment.sh /etc/profile.d/
