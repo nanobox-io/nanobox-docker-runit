@@ -1,18 +1,20 @@
-all: runit
+all: build publish
 
-runit:
-ifdef docker_user
-	vagrant up && vagrant destroy -f
-else
-	export docker_user='nanobox' && vagrant up && vagrant destroy -f
-endif
+stability?=latest
+
+login:
+	@vagrant ssh -c "docker login"
+
+build:
+	@echo "Building 'runit' image..."
+	@vagrant ssh -c "docker build -t nanobox/runit /vagrant"
 
 publish:
-ifdef docker_user
-	vagrant provision
-else
-	export docker_user='nanobox' && vagrant provision
-endif
+	@echo "Tagging 'runit' image..."
+	@vagrant ssh -c "docker tag -f nanobox/runit nanobox/runit:${stability}"
+	@echo "Publishing 'runit:${stability}'..."
+	@vagrant ssh -c "docker push nanobox/runit:${stability}"
 
 clean:
-	vagrant destroy -f
+	@echo "Removing all images..."
+	@vagrant ssh -c "for image in $(docker images -q); do docker rmi -f $image; done"
