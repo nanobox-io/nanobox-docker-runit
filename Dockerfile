@@ -3,7 +3,7 @@ FROM nanobox/base
 # Install pkgin packages
 RUN rm -rf /var/gonano/db/pkgin && /opt/gonano/bin/pkgin -y up && \
     /opt/gonano/bin/pkgin -y in nanoinit runit narc && \
-    rm -rf /var/gonano/db/pkgin
+    rm -rf /var/gonano/db/pkgin/cache
 
 # copy files
 ADD scripts/. /var/tmp/
