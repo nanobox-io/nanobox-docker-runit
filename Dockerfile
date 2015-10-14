@@ -16,7 +16,7 @@ RUN ln -s /etc/service /service
 RUN /var/tmp/prepare-docker-init
 
 # Cleanup disk
-RUN rm -rf /tmp/* /var/tmp/*
+RUN docker_prepare
 
 # Run runit automatically
 CMD /opt/gonano/bin/nanoinit
