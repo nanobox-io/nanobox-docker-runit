@@ -15,6 +15,16 @@ publish:
 	@echo "Publishing 'runit:${stability}'..."
 	@vagrant ssh -c "docker push nanobox/runit:${stability}"
 
-clean:
+PHONY: clean clean-base clean-project
+
+clean: clean-base
 	@echo "Removing all images..."
-	@vagrant ssh -c "for image in \$$(docker images -q| sort | uniq); do docker rmi -f \$$image; done"
+	@vagrant ssh -c "for image in \$$(docker images -q | sort | uniq); do docker rmi -f \$$image; done"
+
+clean-base: clean-project
+	@echo "Removing base images..."
+	@vagrant ssh -c "for image in \$$(docker images -q nanobox/base | sort | uniq); do docker rmi -f \$$image; done"
+
+clean-project:
+	@echo "Removing runit images..."
+	@vagrant ssh -c "for image in \$$(docker images -q nanobox/runit | sort | uniq); do docker rmi -f \$$image; done"
