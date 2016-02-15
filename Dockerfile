@@ -2,7 +2,7 @@ FROM nanobox/base
 
 # Install pkgin packages
 RUN rm -rf /var/gonano/db/pkgin && /opt/gonano/bin/pkgin -y up && \
-    /opt/gonano/bin/pkgin -y in nanoinit runit narc && \
+    /opt/gonano/bin/pkgin -y in nanoinit runit narc openssh && \
     rm -rf /var/gonano/db/pkgin/cache
 
 # copy files
