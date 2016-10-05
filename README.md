@@ -1,4 +1,4 @@
-## nanobox-docker-runit
+## nanobox-docker-runit [![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-docker-runit.svg)](https://travis-ci.org/nanobox-io/nanobox-docker-runit)
 
 This repo contains the files necessary to create a docker 'runit' image for [Nanobox](http://nanobox.io) consumption.
 
