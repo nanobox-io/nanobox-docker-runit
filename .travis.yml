@@ -18,7 +18,7 @@ after_success:
   - docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit:beta;
   - docker push ${REMOTE}${NAMESPACE}/runit:beta;
   - if [ "$BRANCH" == "master" ]; then
-  docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit;
+    docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit;
     docker push ${REMOTE}${NAMESPACE}/runit;
     else
     docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit:${BRANCH//\//_};
