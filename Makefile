@@ -11,7 +11,7 @@ build:
 
 publish:
 	@echo "Tagging 'runit' image..."
-	@vagrant ssh -c "docker tag -f nanobox/runit nanobox/runit:${stability}"
+	@vagrant ssh -c "docker tag nanobox/runit nanobox/runit:${stability}"
 	@echo "Publishing 'runit:${stability}'..."
 	@vagrant ssh -c "docker push nanobox/runit:${stability}"
 
