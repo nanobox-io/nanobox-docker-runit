@@ -17,10 +17,14 @@ after_success:
   - docker-squash -t ${NAMESPACE}/runit:squashed -f nanobox/base --tmp-dir /var/tmp/squasher ${NAMESPACE}/runit
   - docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit:beta;
   - docker push ${REMOTE}${NAMESPACE}/runit:beta;
-  - if [ "$BRANCH" == "master" ]; then
+  - 'if [ "$BRANCH" == "master" ]; then
     docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit;
     docker push ${REMOTE}${NAMESPACE}/runit;
+    for i in build code bridge elasticsearch hoarder logvac memcached mist mongodb mysql portal postgresql pulse redis rethinkdb unfs;
+    do;
+      curl -s -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "Travis-API-Version: 3" -H "Authorization: token ${TRAVIS_TOKEN}" -d "{\"request\":{\"branch\":\"master\"}}" https://api.travis-ci.org/repo/nanobox-io%2Fnanobox-docker-${i}/requests;
+    done;
     else
     docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit:${BRANCH//\//_};
     docker push ${REMOTE}${NAMESPACE}/runit:${BRANCH//\//_};
-    fi
+    fi'
