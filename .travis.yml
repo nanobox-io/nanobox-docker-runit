@@ -21,7 +21,7 @@ after_success:
     docker tag ${NAMESPACE}/runit:squashed ${NAMESPACE}/runit;
     docker push ${REMOTE}${NAMESPACE}/runit;
     for i in build code bridge elasticsearch hoarder logvac memcached mist mongodb mysql portal postgresql pulse redis rethinkdb unfs;
-    do;
+    do
       curl -s -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "Travis-API-Version: 3" -H "Authorization: token ${TRAVIS_TOKEN}" -d "{\"request\":{\"branch\":\"master\"}}" https://api.travis-ci.org/repo/nanobox-io%2Fnanobox-docker-${i}/requests;
     done;
     else
