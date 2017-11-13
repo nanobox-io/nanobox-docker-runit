@@ -1,4 +1,4 @@
-FROM nanobox/base
+FROM nanobox/base:feature_release-2017-11
 
 # Install pkgin packages
 RUN rm -rf /var/gonano/db/pkgin && /opt/gonano/bin/pkgin -y up && \
